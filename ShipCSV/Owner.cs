@@ -17,13 +17,11 @@ namespace ShipCSV
             Name = ownerName;
             Ship = ship;
             Owners = new List<Owner>() { this };
-            ShipCount = 0;
-
         }
 
         public Owner CountShipsPerOwner()
         {
-            var i = 0;
+            var i = 1;
             foreach (var owner in Owners)
             {
                 if (owner.Name == Name) i++;

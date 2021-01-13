@@ -5,9 +5,10 @@ using System.Collections.Generic;
 
 namespace ShipCSV
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        //public static List<Ship> ShipList;
+        public static void Main(string[] args)
         {
             var ships = new List<Ship>();
             using (var sr = new StreamReader(@"C:\Users\GET Academy\source\repos\ShipCSV\ShipCSV\ShipTest1.txt"))
@@ -22,22 +23,21 @@ namespace ShipCSV
                     var ship = shipYard.CreateShip();
                     var owner = shipYard.CreateOwner(ship);
                     var countedOwner = owner.CountShipsPerOwner();
+                    ship.Owner = countedOwner;
                     if (countedOwner.ShipCount > 2) ships.Add(countedOwner.Ship);
-                    if (countedOwner.ShipCount == 2) // if > 2 - bypass algorithm below
+                    if (countedOwner.ShipCount == 2) // if > 2 - bypass steps below
                     {
                         ships.Add(countedOwner.Ship); //add current/first ship instance
                         countedOwner.RemoveOwner(); //remove to isolate remaining instance
                         var secondShip = countedOwner.AddSecondShip();
                         ships.Add(secondShip); //adds remaining ship
-                        countedOwner.AddOwner(); //re-adds owner to maintain algorithm
-
+                        countedOwner.AddOwner(); //re-adds owner to maintain count/algorithm
                     }
                 }
             }
-            Console.WriteLine("yeeeee");
             foreach (var ship in ships)
             {
-                Console.WriteLine($"{ship.Name}");
+                Console.WriteLine($"{ship.Id} {ship.Name}");
             }
         }
     }
