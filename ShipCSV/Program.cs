@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+using System.IO;    
 using System.Linq;
 using System.Collections.Generic;
 
@@ -10,9 +10,8 @@ namespace ShipCSV
         public static void Main(string[] args)
         {
             var ships = new List<Ship>();
-            using (var sr = new StreamReader(@"C:\Users\GET Academy\source\repos\ShipCSV\ShipCSV\ShipTest1.txt"))
+            using (var sr = new StreamReader("ShipTest1.txt"))
             {
-                sr.ReadLine();
                 while (true)
                 {
                     var line = sr.ReadLine();
@@ -33,12 +32,14 @@ namespace ShipCSV
                     }
                     if (countedOwner.ShipCount > 2) ships.Add(countedOwner.Ship);
                     // more than two instances means the owner has been treated, and can be added directly,
-                    // bypassing the steps above which are designed for handling the first occurance of serial-ownership 
+                    // bypassing the steps above which are designed for handling the first occurance of serial-ownership
                 }
             }
+
             foreach (var ship in ships)
             {
-                Console.WriteLine($"{ship.Id} {ship.Name} {ship.Owner.Name} {ship.Owner.ShipCount}");
+                //if (ship == null) continue;
+                Console.WriteLine($"{ship.Id } {ship.Name} {ship.Owner.Name} {ship.Owner.ShipCount}");
             }
         }
     }
