@@ -5,3 +5,6 @@
 "4622464765","Baat5","Petter"
 "356","Baat6","Espen"
 "2539","Baat7","Jonas"
+"1","Baat8","Pål"
+"2","Baat9","Pål"
+"3","Baat10","Petter"
