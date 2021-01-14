@@ -10,23 +10,22 @@ namespace ShipCSV
         public int ShipCount;
         public Ship Ship;
         public Ship SecondShip;
-        public List<Owner> Owners;
+        public static List<Owner> Owners = new List<Owner>();
 
         public Owner(string ownerName, Ship ship)
         {
             Name = ownerName;
             Ship = ship;
-            Owners = new List<Owner>() { this };
+            Owners.Add(this);
+            ShipCount = 0;
         }
 
         public Owner CountShipsPerOwner()
         {
-            var i = 1;
             foreach (var owner in Owners)
             {
-                if (owner.Name == Name) i++;
+                if (owner.Name == Name) ShipCount++;
             }
-            ShipCount = i;
             return this;
         }
 

@@ -7,7 +7,6 @@ namespace ShipCSV
 {
     public class Program
     {
-        //public static List<Ship> ShipList;
         public static void Main(string[] args)
         {
             var ships = new List<Ship>();
@@ -24,8 +23,7 @@ namespace ShipCSV
                     var owner = shipYard.CreateOwner(ship);
                     var countedOwner = owner.CountShipsPerOwner();
                     ship.Owner = countedOwner;
-                    if (countedOwner.ShipCount > 2) ships.Add(countedOwner.Ship);
-                    if (countedOwner.ShipCount == 2) // if > 2 - bypass steps below
+                    if (countedOwner.ShipCount == 2) // when there're two instances in Owners..
                     {
                         ships.Add(countedOwner.Ship); //add current/first ship instance
                         countedOwner.RemoveOwner(); //remove to isolate remaining instance
@@ -33,11 +31,13 @@ namespace ShipCSV
                         ships.Add(secondShip); //adds remaining ship
                         countedOwner.AddOwner(); //re-adds owner to maintain count/algorithm
                     }
+                    if (countedOwner.ShipCount > 2) ships.Add(countedOwner.Ship);
+                    // more than two instances means the owner has been treated, and can be added directly
                 }
             }
             foreach (var ship in ships)
             {
-                Console.WriteLine($"{ship.Id} {ship.Name}");
+                Console.WriteLine($"{ship.Id} {ship.Name} {ship.Owner.Name}");
             }
         }
     }
